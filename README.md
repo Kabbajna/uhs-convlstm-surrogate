@@ -72,53 +72,39 @@ deeponet/
 ├── README.md                           # This file
 ├── LICENSE                             # License information
 ├── requirements.txt                    # Python dependencies
-├── environment.yml                     # Conda environment
+├── DATA_README.md                      # Dataset documentation
 │
-├── data/                              # Dataset (not included - see Data Availability)
-│   ├── low_fidelity/                  # 2000 simulations (reference only)
-│   ├── medium_fidelity/               # 500 simulations (20×20×20)
-│   └── high_fidelity/                 # 100 simulations (40×40×20)
+├── final_codes_github/                 # ⭐ Main training codes (READY TO USE)
+│   ├── config_shared.py                # Shared configuration (SEED=42, splits, etc.)
+│   ├── 01_ConvLSTM_UNet_ScheduledSampling.py  # Best model (R²=0.990)
+│   ├── 02_ConvLSTM_UNet_TeacherForcing.py     # Baseline (R²=0.071)
+│   ├── 03_3D_UNet_Baseline.py                 # No temporal memory
+│   ├── 04_FNO_Baseline.py                     # Spectral method
+│   ├── ablation_A.py                          # No saturation loss
+│   ├── ablation_B.py                          # No mass loss
+│   ├── ablation_C.py                          # No Darcy loss
+│   ├── verify_consistency.py                  # Verify all configs match
+│   └── README_CODES.md                        # Documentation
 │
-├── src/                               # Source code
-│   ├── models/                        # Model architectures
-│   │   ├── convlstm_unet.py          # Main ConvLSTM-UNet model
-│   │   ├── baseline_unet.py          # 3D U-Net baseline
-│   │   └── fno_3d.py                 # FNO baseline
-│   ├── data/                          # Data loading and preprocessing
-│   │   ├── dataset.py                # PyTorch dataset classes
-│   │   └── preprocessing.py          # Normalization utilities
-│   ├── training/                      # Training utilities
-│   │   ├── trainer.py                # Training loop
-│   │   ├── losses.py                 # Physics-informed loss functions
-│   │   └── scheduled_sampling.py     # Scheduled sampling implementation
-│   └── evaluation/                    # Evaluation and metrics
-│       ├── metrics.py                # R², MAE, recovery factor
-│       └── visualization.py          # Plotting utilities
+├── figure_generation/                  # Scripts to reproduce paper figures
+│   ├── Figure4_Ablation_Study.py       # Ablation study comparison
+│   ├── Figure5_Prediction_vs_GT.py     # Prediction vs ground truth
+│   ├── Figure6_Phase_Analysis.py       # Phase-specific errors
+│   ├── Figure7_Spatial_Error.py        # Spatial error distribution
+│   ├── Figure8_Transfer_Learning.py    # Zero-shot transfer results
+│   └── README_FIGURES.md               # Figure generation guide
 │
-├── scripts/                           # Executable scripts
-│   ├── train_medium_fidelity.py      # Train on 20³ grid
-│   ├── train_high_fidelity.py        # Fine-tune on 40×40×20 grid
-│   ├── evaluate_model.py             # Evaluation script
-│   └── generate_mrst_data.m          # MATLAB/MRST data generation
+├── mrst_scripts/                       # MATLAB data generation
+│   ├── generate_multifidelity_data.m   # MRST simulation script
+│   └── README_MRST.md                  # MRST setup guide
 │
-├── notebooks/                         # Jupyter notebooks
-│   ├── 01_data_exploration.ipynb     # Dataset analysis
-│   ├── 02_model_training.ipynb       # Training demonstration
-│   └── 03_results_visualization.ipynb # Results and figures
+├── sample_data/                        # Sample simulations (for demo)
+│   ├── medium_fidelity/                # 2 sample .mat files
+│   └── README.md                       # Full dataset download links
 │
-├── checkpoints/                       # Model checkpoints
-│   ├── convlstm_unet_medium.pt       # Best medium-fidelity model
-│   └── convlstm_unet_high.pt         # Best high-fidelity model
-│
-├── results/                           # Experimental results
-│   ├── figures/                       # Publication figures
-│   ├── metrics/                       # Evaluation metrics (JSON)
-│   └── ablation/                      # Ablation study results
-│
-└── docs/                              # Documentation
-    ├── METHODOLOGY.md                 # Detailed methodology
-    ├── MRST_SETUP.md                 # MRST simulation setup
-    └── REPRODUCING.md                # Reproduction instructions
+├── checkpoints/                        # Model checkpoints (after training)
+├── publication_figures/                # Generated figures (PDF + PNG)
+└── results/                            # Evaluation metrics (JSON)
 ```
 
 ## Installation
